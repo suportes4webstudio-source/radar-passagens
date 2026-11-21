@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar de Passagens para BH</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5f6b7a; --line:#e3e7ec;
+    --accent:#0b6bcb; --accent2:#dbeafe; --good:#0f8a4b; --goodbg:#e7f6ee; --warn:#a15c00; --bar:#c9d8ea;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0f1216; --card:#171b21; --ink:#e8ecf1; --muted:#9aa5b3; --line:#2a313a;
+      --accent:#5aa9ff; --accent2:#1b2c44; --good:#4cc98a; --goodbg:#16301f; --warn:#e3a54a; --bar:#2f4058; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 18px 60px}
+  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--good)} .dot.stale{background:var(--warn)}
+  .routes{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+  .routes button{font:inherit;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:10px;cursor:pointer}
+  .routes button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .label{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+  .big{font-size:30px;font-weight:700;letter-spacing:-.02em}
+  .hero{border-color:var(--good);background:linear-gradient(0deg,var(--card),var(--goodbg))}
+  .hero .big{color:var(--good)}
+  .small{font-size:13px;color:var(--muted)}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tabs button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 11px;border-radius:8px;cursor:pointer}
+  .tabs button.on{background:var(--accent2);border-color:var(--accent);color:var(--accent);font-weight:600}
+  .rowhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:10px 8px;border-bottom:1px solid var(--line)}
+  td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  td.preco{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.best td.preco{color:var(--good)}
+  .tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--goodbg);color:var(--good);margin-left:6px;white-space:nowrap}
+  .tag.soon{background:var(--accent2);color:var(--accent)}
+  .cia{font-weight:600}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .tablewrap{overflow-x:auto}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .dow{font-size:11px;color:var(--muted);text-align:center;text-transform:uppercase;letter-spacing:.05em}
+  .day{border:1px solid var(--line);border-radius:10px;padding:8px 6px;text-align:center;min-height:64px;display:flex;flex-direction:column;justify-content:space-between}
+  .day .d{font-size:12px;color:var(--muted)}
+  .day .p{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+  .day.none{opacity:.45}
+  .day.cheap{background:var(--goodbg);border-color:var(--good)} .day.cheap .p{color:var(--good)}
+  .day.top{outline:2px solid var(--good)}
+  .day.past{visibility:hidden}
+  .legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  svg text{fill:var(--muted);font-size:11px;font-family:Inter,sans-serif}
+  .empty{padding:26px;text-align:center;color:var(--muted)}
+  footer{margin-top:22px;font-size:12px;color:var(--muted)}
+  @media (max-width:560px){ .day .p{font-size:12px} .day{min-height:56px;padding:6px 3px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>✈️ Radar de Passagens para Belo Horizonte (Confins)</h1>
+      <div class="sub">Menores preços encontrados nos buscadores, com foco nas datas mais próximas</div>
+    </div>
+    <span class="pill"><span class="dot" id="dot"></span><span id="statusTxt">Carregando…</span></span>
+  </header>
+
+  <div class="routes" id="routes">
+    <button data-r="SP" class="on">São Paulo → BH</button>
+    <button data-r="POA">Porto Alegre → BH</button>
+  </div>
+
+  <div class="grid">
+    <div class="card hero">
+      <div class="label">Mais barato nos próximos 30 dias</div>
+      <div class="big" id="k30">—</div>
+      <div class="small" id="k30Info"></div>
+    </div>
+    <div class="card">
+      <div class="label">Próxima data com preço</div>
+      <div class="big" id="kNext">—</div>
+      <div class="small" id="kNextInfo"></div>
+    </div>
+    <div class="card">
+      <div class="label">Menor preço em qualquer data</div>
+      <div class="big" id="kAny">—</div>
+      <div class="small" id="kAnyInfo"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <div class="rowhead">
+      <div class="label" style="margin:0">Calendário dos próximos dias · só ida, por pessoa</div>
+      <span class="small" id="calSrc"></span>
+    </div>
+    <div id="cal"></div>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--goodbg);border:1px solid var(--good)"></span>Entre os 25% mais baratos</span>
+      <span><span class="sw" style="outline:2px solid var(--good)"></span>Dia mais barato</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <div class="rowhead">
+      <div class="label" style="margin:0">Ofertas</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="tabs" id="tipo">
+          <button data-f="todas" class="on">Todas</button>
+          <button data-f="ida">Só ida</button>
+          <button data-f="idaevolta">Ida e volta</button>
+        </div>
+        <div class="tabs" id="ordem">
+          <button data-o="data" class="on">Mais próximas</button>
+          <button data-o="preco">Mais baratas</button>
+        </div>
+      </div>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Ida</th><th>Companhia</th><th>Rota</th><th>Volta</th><th>Tipo</th><th>Preço</th><th>Fonte</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="7" class="empty">Carregando ofertas…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="label">Histórico: menor preço nos próximos 30 dias, a cada atualização</div>
+    <div id="chart"></div>
+  </div>
+
+  <footer>
+    Atualização automática de hora em hora. Os valores são preços “a partir de” por pessoa exibidos publicamente por buscadores e companhias (Azul, Decolar, Kayak, Momondo etc.) no momento da coleta. Podem mudar, ser de tarifa sem bagagem ou já não estar disponíveis. Confirme sempre no site antes de comprar.
+  </footer>
+</div>
+
+<script>
+const brl = v => v==null ? "—" : Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+const D = s => new Date(s+"T12:00:00");
+const fmtData = s => s ? D(s).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"short"}).replace(/\./g,"") : "";
+const fmtCurta = s => s ? D(s).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}) : "";
+const fmtHora = s => new Date(s).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl = u => /^https:\/\//.test(u||"") ? u : null;
+const hojeISO = () => { const d=new Date(); return new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10); };
+const dias = (a,b) => Math.round((D(b)-D(a))/864e5);
+const NOMES = {SP:"São Paulo", POA:"Porto Alegre"};
+
+let data=null, rota="SP", tipo="todas", ordem="data";
+try{ const r=localStorage.getItem("radar-rota"); if(r==="SP"||r==="POA") rota=r; }catch(e){}
+
+function bindTabs(id, attr, set){
+  document.getElementById(id).addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    set(b.dataset[attr]);
+    document.querySelectorAll("#"+id+" button").forEach(x=>x.classList.toggle("on",x===b));
+    render();
+  });
+}
+bindTabs("routes","r",v=>{rota=v; try{localStorage.setItem("radar-rota",v)}catch(e){}});
+bindTabs("tipo","f",v=>tipo=v);
+bindTabs("ordem","o",v=>ordem=v);
+document.querySelectorAll("#routes button").forEach(x=>x.classList.toggle("on",x.dataset.r===rota));
+
+const hoje = hojeISO();
+const ofertasRota = () => (data?.ofertas||[]).filter(o=>(o.rota||"SP")===rota && typeof o.preco==="number" && o.ida>=hoje);
+const calRota = () => ((data?.calendario||{})[rota]||[]).filter(c=>c.data>=hoje && typeof c.preco==="number").sort((a,b)=>a.data<b.data?-1:1);
+
+function todasDatas(){
+  // junta calendário + ofertas só de ida para os KPIs
+  const c = calRota().map(x=>({ida:x.data, preco:x.preco, cia:x.cia||"Azul", origem:x.origem, tipo:"ida"}));
+  return c.concat(ofertasRota());
+}
+
+function renderKpis(){
+  const all=todasDatas();
+  const in30=all.filter(x=>dias(hoje,x.ida)<=30);
+  const b30=in30.slice().sort((a,b)=>a.preco-b.preco)[0];
+  const next=all.slice().sort((a,b)=>a.ida<b.ida?-1:a.ida>b.ida?1:a.preco-b.preco)[0];
+  const any=all.slice().sort((a,b)=>a.preco-b.preco)[0];
+  const info=x=>x?`${x.cia||""} · ${x.origem||""}→CNF · ${fmtData(x.ida)}${x.tipo==="idaevolta"?" (ida e volta)":""}`:"Sem dados ainda";
+  k30.textContent=brl(b30?.preco); k30Info.textContent=info(b30);
+  kNext.textContent=brl(next?.preco); kNextInfo.textContent=next?`${info(next)} · em ${dias(hoje,next.ida)} dia(s)`:"Sem dados ainda";
+  kAny.textContent=brl(any?.preco); kAnyInfo.textContent=info(any);
+  if(data?.atualizadoEm){
+    statusTxt.textContent="Atualizado em "+fmtHora(data.atualizadoEm);
+    dot.classList.toggle("stale",(Date.now()-new Date(data.atualizadoEm))/36e5>2);
+  } else statusTxt.textContent="Aguardando primeira coleta";
+}
+
+function renderCal(){
+  const el=document.getElementById("cal"), cal=calRota();
+  const src=cal.find(c=>c.fonte); calSrc.innerHTML = src ? (safeUrl(src.url)?`Fonte: <a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.fonte)}</a>`:"Fonte: "+esc(src.fonte)) : "";
+  if(!cal.length){ el.innerHTML='<div class="empty">Ainda sem calendário para esta rota. Aparece na próxima atualização.</div>'; return; }
+  const map={}; cal.forEach(c=>{ if(!map[c.data]||c.preco<map[c.data].preco) map[c.data]=c; });
+  const precos=Object.values(map).map(c=>c.preco).sort((a,b)=>a-b);
+  const q25=precos[Math.floor((precos.length-1)*0.25)], min=precos[0];
+  const ult=cal[cal.length-1].data;
+  const start=D(hoje); start.setDate(start.getDate()-start.getDay());
+  let html=["dom","seg","ter","qua","qui","sex","sáb"].map(d=>`<div class="dow">${d}</div>`).join("");
+  for(let d=new Date(start); d<=D(ult) || d.getDay()!==0; d.setDate(d.getDate()+1)){
+    const iso=new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+    if(iso<hoje){ html+='<div class="day past"></div>'; continue; }
+    const c=map[iso];
+    const cls=c?(c.preco===min?"cheap top":c.preco<=q25?"cheap":""):"none";
+    html+=`<div class="day ${cls}" title="${c?esc((c.origem||"")+"→"+(c.destino||"CNF")+" · "+(c.cia||"")):""}"><span class="d">${fmtCurta(iso)}</span><span class="p">${c?brl(c.preco):"—"}</span></div>`;
+  }
+  el.innerHTML=`<div class="cal">${html}</div>`;
+}
+
+function renderRows(){
+  const tb=document.getElementById("rows");
+  let list=ofertasRota();
+  if(tipo!=="todas") list=list.filter(o=>o.tipo===tipo);
+  if(!list.length){ tb.innerHTML=`<tr><td colspan="7" class="empty">Nenhuma oferta ${tipo==="todas"?"":"desse tipo "}para ${NOMES[rota]} ainda.</td></tr>`; return; }
+  const min=Math.min(...list.map(o=>o.preco));
+  list.sort(ordem==="data" ? (a,b)=>a.ida<b.ida?-1:a.ida>b.ida?1:a.preco-b.preco : (a,b)=>a.preco-b.preco||(a.ida<b.ida?-1:1));
+  tb.innerHTML=list.map(o=>{
+    const url=safeUrl(o.url), nd=dias(hoje,o.ida);
+    const soon=nd<=7?`<span class="tag soon">${nd===0?"hoje":nd===1?"amanhã":"em "+nd+" dias"}</span>`:"";
+    return `<tr class="${o.preco===min?'best':''}">
+      <td style="white-space:nowrap">${esc(fmtData(o.ida))}${soon}</td>
+      <td class="cia">${esc(o.cia)}${o.direto?' <span class="small">· direto</span>':''}</td>
+      <td>${esc(o.origem)} → ${esc(o.destino||"CNF")}</td>
+      <td style="white-space:nowrap">${o.volta?esc(fmtData(o.volta)):"—"}</td>
+      <td>${o.tipo==="idaevolta"?"Ida e volta":"Só ida"}</td>
+      <td class="preco">${brl(o.preco)}${o.preco===min?'<span class="tag">melhor</span>':''}</td>
+      <td>${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(o.fonte||"ver")}</a>`:esc(o.fonte||"")}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderChart(){
+  const el=document.getElementById("chart"), key=rota==="SP"?"spMin30":"poaMin30";
+  const h=(data?.historico||[]).filter(x=>typeof x[key]==="number").slice(-72);
+  if(h.length<2){ el.innerHTML='<div class="empty">O gráfico aparece depois de duas atualizações com dados desta rota.</div>'; return; }
+  const W=900,H=180,p={l:56,r:14,t:12,b:26};
+  const ys=h.map(x=>x[key]), lo=Math.min(...ys)*0.95, hi=Math.max(...ys)*1.05;
+  const X=i=>p.l+i*(W-p.l-p.r)/(h.length-1), Y=v=>p.t+(hi-v)*(H-p.t-p.b)/((hi-lo)||1);
+  const path=h.map((x,i)=>(i?"L":"M")+X(i).toFixed(1)+","+Y(x[key]).toFixed(1)).join("");
+  const ticks=[lo,(lo+hi)/2,hi].map(v=>`<line x1="${p.l}" x2="${W-p.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${p.l-8}" y="${Y(v)+4}" text-anchor="end">${brl(v)}</text>`).join("");
+  const lbl=[0,Math.floor((h.length-1)/2),h.length-1].map(i=>`<text x="${X(i)}" y="${H-6}" text-anchor="middle">${fmtHora(h[i].t)}</text>`).join("");
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Histórico do menor preço">${ticks}${lbl}<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${X(h.length-1)}" cy="${Y(ys[ys.length-1])}" r="4.5" fill="var(--accent)"/></svg>`;
+}
+
+function render(){ if(!data) return; renderKpis(); renderCal(); renderRows(); renderChart(); }
+
+async function carregar(){
+  try{
+    const r=await fetch("ofertas.json?t="+Date.now(),{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    data=await r.json(); render();
+  }catch(e){
+    if(!data){ statusTxt.textContent="Não foi possível carregar os dados"; rows.innerHTML='<tr><td colspan="7" class="empty">Não foi possível carregar. Recarregue a página.</td></tr>'; }
+  }
+}
+carregar(); setInterval(carregar, 10*60*1000);
+</script>
+</body>
+</html>
