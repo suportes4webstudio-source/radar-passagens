@@ -61,6 +61,14 @@
   svg text{fill:var(--muted);font-size:11px;font-family:Inter,sans-serif}
   .empty{padding:26px;text-align:center;color:var(--muted)}
   footer{margin-top:22px;font-size:12px;color:var(--muted)}
+  .acoes{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .btn-atualizar{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:14px;font-weight:600;color:#fff;background:var(--accent);border:0;padding:8px 14px;border-radius:999px;cursor:pointer;transition:filter .15s}
+  .btn-atualizar:hover{filter:brightness(1.08)} .btn-atualizar:disabled{opacity:.75;cursor:default}
+  .btn-atualizar:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
+  .btn-atualizar.girando svg{animation:gira .9s linear infinite}
+  @keyframes gira{to{transform:rotate(360deg)}}
+  .msg-atualizar{width:100%;text-align:right;font-size:13px;color:var(--accent)}
+  @media (max-width:560px){ .msg-atualizar{text-align:left} }
   @media (max-width:560px){ .day .p{font-size:12px} .day{min-height:56px;padding:6px 3px} }
 </style>
 </head>
@@ -71,7 +79,14 @@
       <h1>✈️ Radar de Passagens para Belo Horizonte (Confins)</h1>
       <div class="sub">Menores preços encontrados nos buscadores, com foco nas datas mais próximas</div>
     </div>
-    <span class="pill"><span class="dot" id="dot"></span><span id="statusTxt">Carregando…</span></span>
+    <div class="acoes">
+      <span class="pill"><span class="dot" id="dot"></span><span id="statusTxt">Carregando…</span></span>
+      <button class="btn-atualizar" id="btnAtualizar" type="button" aria-label="Atualizar passagens">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        <span>Atualizar</span>
+      </button>
+    </div>
+    <div class="msg-atualizar" id="msgAtualizar" role="status" hidden></div>
   </header>
 
   <div class="routes" id="routes">
@@ -137,6 +152,7 @@
 
   <footer>
     Atualização automática de hora em hora. Os valores são preços “a partir de” por pessoa exibidos publicamente por buscadores e companhias (Azul, Decolar, Kayak, Momondo etc.) no momento da coleta. Podem mudar, ser de tarifa sem bagagem ou já não estar disponíveis. Confirme sempre no site antes de comprar.
+    <br><a href="https://github.com/suportes4webstudio-source/radar-passagens/actions/workflows/atualizar.yml" target="_blank" rel="noopener">Forçar nova busca na Azul</a> (só para o dono do repositório: clique em “Run workflow”).
   </footer>
 </div>
 
@@ -251,16 +267,61 @@ function renderChart(){
 
 function render(){ if(!data) return; renderKpis(); renderCal(); renderRows(); renderChart(); }
 
-async function carregar(){
+const API_URL="https://api.github.com/repos/suportes4webstudio-source/radar-passagens/contents/ofertas.json?ref=main";
+
+// Busca direto no GitHub (sem o cache de ~10 min do site); se falhar, usa o arquivo do site.
+async function buscarDados(fresco){
+  if(fresco){
+    try{
+      const r=await fetch(API_URL+"&t="+Date.now(),{cache:"no-store",headers:{Accept:"application/vnd.github+json"}});
+      if(r.ok){
+        const j=await r.json();
+        const bin=atob((j.content||"").replace(/\n/g,""));
+        const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+        return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+      }
+    }catch(e){}
+  }
+  const r=await fetch("ofertas.json?t="+Date.now(),{cache:"no-store"});
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function carregar(fresco){
   try{
-    const r=await fetch("ofertas.json?t="+Date.now(),{cache:"no-store"});
-    if(!r.ok) throw new Error(r.status);
-    data=await r.json(); render();
+    const novo=await buscarDados(fresco);
+    const mudou=!data || novo.atualizadoEm!==data.atualizadoEm;
+    data=novo; render();
+    return mudou;
   }catch(e){
     if(!data){ statusTxt.textContent="Não foi possível carregar os dados"; rows.innerHTML='<tr><td colspan="7" class="empty">Não foi possível carregar. Recarregue a página.</td></tr>'; }
+    throw e;
   }
 }
-carregar(); setInterval(carregar, 10*60*1000);
+
+function proximaAuto(){
+  const d=new Date(); const n=new Date(d); n.setUTCMinutes(17,0,0);
+  if(n<=d) n.setUTCHours(n.getUTCHours()+1);
+  return n.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+}
+
+const btn=document.getElementById("btnAtualizar"), msg=document.getElementById("msgAtualizar");
+let msgTimer;
+function aviso(t){ msg.textContent=t; msg.hidden=false; clearTimeout(msgTimer); msgTimer=setTimeout(()=>msg.hidden=true,6000); }
+btn.addEventListener("click", async ()=>{
+  if(btn.disabled) return;
+  btn.disabled=true; btn.classList.add("girando"); btn.querySelector("span").textContent="Atualizando…";
+  try{
+    const mudou=await carregar(true);
+    aviso(mudou ? "Preços atualizados!" : `Você já está vendo os preços mais recentes. Próxima busca automática por volta das ${proximaAuto()}.`);
+  }catch(e){
+    aviso("Não foi possível atualizar agora. Tente de novo em instantes.");
+  }finally{
+    setTimeout(()=>{ btn.disabled=false; btn.classList.remove("girando"); btn.querySelector("span").textContent="Atualizar"; },800);
+  }
+});
+
+carregar(true).catch(()=>{}); setInterval(()=>carregar(false).catch(()=>{}), 10*60*1000);
 </script>
 </body>
 </html>
