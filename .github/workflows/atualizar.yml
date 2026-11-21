@@ -1,0 +1,47 @@
+name: Atualizar ofertas
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # de hora em hora, no minuto 17 (UTC)
+  workflow_dispatch:        # permite rodar manualmente pela aba Actions
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/atualizar.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-ofertas
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Buscar preços
+        run: python3 scripts/atualizar.py
+
+      - name: Publicar se mudou
+        run: |
+          if git diff --quiet -- ofertas.json; then
+            echo "Sem mudanças."
+            exit 0
+          fi
+          git config user.name "radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ofertas.json
+          git commit -m "Atualiza ofertas $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push origin main && exit 0
+            sleep 5
+          done
+          exit 1
