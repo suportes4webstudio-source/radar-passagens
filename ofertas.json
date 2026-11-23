@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-23T04:20:09Z",
+ "atualizadoEm": "2026-11-23T06:17:03Z",
  "calendario": {
   "SP": [
    {
@@ -157,8 +157,8 @@
    },
    {
     "data": "2026-12-11",
-    "origem": "GRU",
-    "destino": "CNF",
+    "origem": "SAO",
+    "destino": "BHZ",
     "preco": 510,
     "cia": "Azul",
     "fonte": "Azul",
@@ -211,9 +211,9 @@
    },
    {
     "data": "2026-12-17",
-    "origem": "GRU",
+    "origem": "SAO",
     "destino": "CNF",
-    "preco": 823,
+    "preco": 632,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -306,15 +306,6 @@
     "origem": "POA",
     "destino": "CNF",
     "preco": 1573,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
-   },
-   {
-    "data": "2026-12-03",
-    "origem": "POA",
-    "destino": "BHZ",
-    "preco": 1289,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -1002,6 +993,13 @@
   },
   {
    "t": "2026-11-23T04:20:09Z",
+   "spMin30": 180,
+   "poaMin30": 855,
+   "spMinIda": 180,
+   "poaMinIda": 303
+  },
+  {
+   "t": "2026-11-23T06:17:03Z",
    "spMin30": 180,
    "poaMin30": 855,
    "spMinIda": 180,
