@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-23T19:13:08Z",
+ "atualizadoEm": "2026-11-23T20:13:19Z",
  "calendario": {
   "SP": [
    {
@@ -22,8 +22,8 @@
    },
    {
     "data": "2026-11-25",
-    "origem": "CGH",
-    "destino": "CNF",
+    "origem": "SAO",
+    "destino": "BHZ",
     "preco": 726,
     "cia": "Azul",
     "fonte": "Azul",
@@ -1099,6 +1099,13 @@
   },
   {
    "t": "2026-11-23T19:13:08Z",
+   "spMin30": 180,
+   "poaMin30": 855,
+   "spMinIda": 180,
+   "poaMinIda": 303
+  },
+  {
+   "t": "2026-11-23T20:13:19Z",
    "spMin30": 180,
    "poaMin30": 855,
    "spMinIda": 180,
