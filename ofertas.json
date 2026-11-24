@@ -1,21 +1,21 @@
 {
- "atualizadoEm": "2026-11-24T04:11:33Z",
+ "atualizadoEm": "2026-11-24T05:19:54Z",
  "calendario": {
   "SP": [
    {
     "data": "2026-11-24",
     "origem": "GRU",
     "destino": "BHZ",
-    "preco": 877,
+    "preco": 2053,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-11-25",
-    "origem": "SAO",
+    "origem": "CGH",
     "destino": "BHZ",
-    "preco": 726,
+    "preco": 1781,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -40,9 +40,9 @@
    },
    {
     "data": "2026-11-28",
-    "origem": "SAO",
-    "destino": "BHZ",
-    "preco": 625,
+    "origem": "GRU",
+    "destino": "CNF",
+    "preco": 1549,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -68,8 +68,8 @@
    {
     "data": "2026-12-01",
     "origem": "CGH",
-    "destino": "BHZ",
-    "preco": 624,
+    "destino": "CNF",
+    "preco": 1401,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -94,7 +94,7 @@
    },
    {
     "data": "2026-12-04",
-    "origem": "SAO",
+    "origem": "GRU",
     "destino": "CNF",
     "preco": 1009,
     "cia": "Azul",
@@ -104,17 +104,17 @@
    {
     "data": "2026-12-05",
     "origem": "SAO",
-    "destino": "CNF",
-    "preco": 1009,
+    "destino": "BHZ",
+    "preco": 766,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-12-06",
-    "origem": "GRU",
+    "origem": "CGH",
     "destino": "CNF",
-    "preco": 486,
+    "preco": 1035,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -140,17 +140,17 @@
    {
     "data": "2026-12-09",
     "origem": "CGH",
-    "destino": "BHZ",
-    "preco": 738,
+    "destino": "CNF",
+    "preco": 570,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-12-10",
-    "origem": "GRU",
-    "destino": "CNF",
-    "preco": 510,
+    "origem": "SAO",
+    "destino": "BHZ",
+    "preco": 543,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -184,9 +184,9 @@
    },
    {
     "data": "2026-12-14",
-    "origem": "SAO",
-    "destino": "CNF",
-    "preco": 543,
+    "origem": "CGH",
+    "destino": "BHZ",
+    "preco": 908,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -202,18 +202,18 @@
    },
    {
     "data": "2026-12-16",
-    "origem": "SAO",
-    "destino": "BHZ",
-    "preco": 523,
+    "origem": "CGH",
+    "destino": "CNF",
+    "preco": 743,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-12-17",
-    "origem": "SAO",
-    "destino": "BHZ",
-    "preco": 882,
+    "origem": "GRU",
+    "destino": "CNF",
+    "preco": 744,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -222,7 +222,7 @@
     "data": "2026-12-18",
     "origem": "SAO",
     "destino": "BHZ",
-    "preco": 523,
+    "preco": 676,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -230,26 +230,26 @@
    {
     "data": "2026-12-19",
     "origem": "SAO",
-    "destino": "CNF",
-    "preco": 632,
+    "destino": "BHZ",
+    "preco": 676,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-12-20",
-    "origem": "CGH",
-    "destino": "BHZ",
-    "preco": 1272,
+    "origem": "GRU",
+    "destino": "CNF",
+    "preco": 1108,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
    },
    {
     "data": "2026-12-21",
-    "origem": "GRU",
+    "origem": "CGH",
     "destino": "BHZ",
-    "preco": 1186,
+    "preco": 894,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -258,7 +258,16 @@
     "data": "2026-12-22",
     "origem": "SAO",
     "destino": "BHZ",
-    "preco": 1078,
+    "preco": 802,
+    "cia": "Azul",
+    "fonte": "Azul",
+    "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
+   },
+   {
+    "data": "2026-12-23",
+    "origem": "CGH",
+    "destino": "CNF",
+    "preco": 894,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -275,10 +284,28 @@
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
    },
    {
+    "data": "2026-11-25",
+    "origem": "POA",
+    "destino": "CNF",
+    "preco": 2678,
+    "cia": "Azul",
+    "fonte": "Azul",
+    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
+   },
+   {
     "data": "2026-11-26",
     "origem": "POA",
     "destino": "BHZ",
     "preco": 1799,
+    "cia": "Azul",
+    "fonte": "Azul",
+    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
+   },
+   {
+    "data": "2026-11-27",
+    "origem": "POA",
+    "destino": "CNF",
+    "preco": 1999,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -350,7 +377,7 @@
     "data": "2026-12-16",
     "origem": "POA",
     "destino": "CNF",
-    "preco": 1042,
+    "preco": 879,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -374,10 +401,10 @@
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
    },
    {
-    "data": "2026-12-20",
+    "data": "2026-12-21",
     "origem": "POA",
     "destino": "CNF",
-    "preco": 1566,
+    "preco": 1142,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -386,7 +413,7 @@
     "data": "2026-12-22",
     "origem": "POA",
     "destino": "CNF",
-    "preco": 1624,
+    "preco": 1370,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -737,7 +764,7 @@
    "cia": "Azul",
    "origem": "POA",
    "destino": "CNF",
-   "ida": "2027-02-08",
+   "ida": "2027-02-06",
    "volta": null,
    "tipo": "ida",
    "direto": false,
@@ -750,7 +777,7 @@
    "cia": "Azul",
    "origem": "POA",
    "destino": "CNF",
-   "ida": "2027-02-19",
+   "ida": "2027-02-08",
    "volta": null,
    "tipo": "ida",
    "direto": false,
@@ -1137,6 +1164,13 @@
   },
   {
    "t": "2026-11-24T04:11:33Z",
+   "spMin30": 180,
+   "poaMin30": 855,
+   "spMinIda": 180,
+   "poaMinIda": 303
+  },
+  {
+   "t": "2026-11-24T05:19:54Z",
    "spMin30": 180,
    "poaMin30": 855,
    "spMinIda": 180,
