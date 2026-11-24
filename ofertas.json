@@ -1,16 +1,7 @@
 {
- "atualizadoEm": "2026-11-24T01:25:04Z",
+ "atualizadoEm": "2026-11-24T03:01:46Z",
  "calendario": {
   "SP": [
-   {
-    "data": "2026-11-23",
-    "origem": "GRU",
-    "destino": "BHZ",
-    "preco": 2064,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
-   },
    {
     "data": "2026-11-24",
     "origem": "GRU",
@@ -274,15 +265,6 @@
    }
   ],
   "POA": [
-   {
-    "data": "2026-11-23",
-    "origem": "POA",
-    "destino": "CNF",
-    "preco": 3554,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
-   },
    {
     "data": "2026-11-24",
     "origem": "POA",
@@ -596,19 +578,6 @@
   },
   {
    "rota": "POA",
-   "cia": "Azul",
-   "origem": "POA",
-   "destino": "CNF",
-   "ida": "2026-11-23",
-   "volta": "2026-11-25",
-   "tipo": "idaevolta",
-   "direto": true,
-   "preco": 2405,
-   "fonte": "Kayak",
-   "url": "https://www.kayak.com.br/voos/Porto-Alegre-Salgado-Filho-POA/Belo-Horizonte-Confins-CNF"
-  },
-  {
-   "rota": "POA",
    "cia": "Várias",
    "origem": "POA",
    "destino": "CNF",
@@ -769,6 +738,19 @@
    "origem": "POA",
    "destino": "CNF",
    "ida": "2027-02-08",
+   "volta": null,
+   "tipo": "ida",
+   "direto": false,
+   "preco": 304,
+   "fonte": "Azul",
+   "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
+  },
+  {
+   "rota": "POA",
+   "cia": "Azul",
+   "origem": "POA",
+   "destino": "CNF",
+   "ida": "2027-02-19",
    "volta": null,
    "tipo": "ida",
    "direto": false,
@@ -1141,6 +1123,13 @@
   },
   {
    "t": "2026-11-24T01:25:04Z",
+   "spMin30": 180,
+   "poaMin30": 855,
+   "spMinIda": 180,
+   "poaMinIda": 303
+  },
+  {
+   "t": "2026-11-24T03:01:46Z",
    "spMin30": 180,
    "poaMin30": 855,
    "spMinIda": 180,
