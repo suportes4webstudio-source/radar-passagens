@@ -1,16 +1,7 @@
 {
- "atualizadoEm": "2026-11-25T01:29:05Z",
+ "atualizadoEm": "2026-11-25T03:08:30Z",
  "calendario": {
   "SP": [
-   {
-    "data": "2026-11-24",
-    "origem": "CGH",
-    "destino": "CNF",
-    "preco": 1278,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
-   },
    {
     "data": "2026-11-25",
     "origem": "CGH",
@@ -275,15 +266,6 @@
   ],
   "POA": [
    {
-    "data": "2026-11-24",
-    "origem": "POA",
-    "destino": "CNF",
-    "preco": 2678,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
-   },
-   {
     "data": "2026-11-25",
     "origem": "POA",
     "destino": "CNF",
@@ -522,19 +504,6 @@
  "ofertas": [
   {
    "rota": "SP",
-   "cia": "GOL",
-   "origem": "CGH",
-   "destino": "CNF",
-   "ida": "2026-11-24",
-   "volta": "2026-11-26",
-   "tipo": "idaevolta",
-   "direto": true,
-   "preco": 600,
-   "fonte": "Mundi",
-   "url": "https://www.mundi.com.br/voos/Sao-Paulo-SAO/Minas-Gerais-BRMG.ksp"
-  },
-  {
-   "rota": "SP",
    "cia": "LATAM",
    "origem": "CGH",
    "destino": "CNF",
@@ -699,6 +668,19 @@
    "tipo": "ida",
    "direto": false,
    "preco": 180,
+   "fonte": "Azul",
+   "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
+  },
+  {
+   "rota": "SP",
+   "cia": "Azul",
+   "origem": "GRU",
+   "destino": "CNF",
+   "ida": "2027-02-24",
+   "volta": null,
+   "tipo": "ida",
+   "direto": false,
+   "preco": 211,
    "fonte": "Azul",
    "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
   },
@@ -1375,6 +1357,13 @@
   },
   {
    "t": "2026-11-25T01:29:05Z",
+   "spMin30": 180,
+   "poaMin30": 797,
+   "spMinIda": 180,
+   "poaMinIda": 303
+  },
+  {
+   "t": "2026-11-25T03:08:30Z",
    "spMin30": 180,
    "poaMin30": 797,
    "spMinIda": 180,
