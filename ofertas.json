@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-27T07:35:54Z",
+ "atualizadoEm": "2026-11-27T09:22:01Z",
  "calendario": {
   "SP": [
    {
@@ -256,18 +256,9 @@
    },
    {
     "data": "2026-12-25",
-    "origem": "CGH",
+    "origem": "GRU",
     "destino": "CNF",
-    "preco": 318,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
-   },
-   {
-    "data": "2026-12-26",
-    "origem": "SAO",
-    "destino": "CNF",
-    "preco": 279,
+    "preco": 302,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-são-paulo-para-belo-horizonte"
@@ -277,7 +268,7 @@
    {
     "data": "2026-11-27",
     "origem": "POA",
-    "destino": "BHZ",
+    "destino": "CNF",
     "preco": 2678,
     "cia": "Azul",
     "fonte": "Azul",
@@ -302,15 +293,6 @@
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
    },
    {
-    "data": "2026-11-30",
-    "origem": "POA",
-    "destino": "CNF",
-    "preco": 2273,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
-   },
-   {
     "data": "2026-12-01",
     "origem": "POA",
     "destino": "BHZ",
@@ -323,7 +305,7 @@
     "data": "2026-12-03",
     "origem": "POA",
     "destino": "BHZ",
-    "preco": 2341,
+    "preco": 2096,
     "cia": "Azul",
     "fonte": "Azul",
     "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
@@ -447,15 +429,6 @@
    },
    {
     "data": "2026-12-24",
-    "origem": "POA",
-    "destino": "CNF",
-    "preco": 1141,
-    "cia": "Azul",
-    "fonte": "Azul",
-    "url": "https://passagens.voeazul.com.br/pt/voos-de-porto-alegre-para-belo-horizonte"
-   },
-   {
-    "data": "2026-12-25",
     "origem": "POA",
     "destino": "BHZ",
     "preco": 631,
@@ -1603,6 +1576,13 @@
   },
   {
    "t": "2026-11-27T07:35:54Z",
+   "spMin30": 180,
+   "poaMin30": 631,
+   "spMinIda": 180,
+   "poaMinIda": 232
+  },
+  {
+   "t": "2026-11-27T09:22:01Z",
    "spMin30": 180,
    "poaMin30": 631,
    "spMinIda": 180,
