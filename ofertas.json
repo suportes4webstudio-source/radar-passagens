@@ -1,5 +1,5 @@
 {
- "atualizadoEm": "2026-11-28T06:12:00Z",
+ "atualizadoEm": "2026-11-28T07:27:46Z",
  "calendario": {
   "SP": [
    {
@@ -1725,6 +1725,13 @@
   },
   {
    "t": "2026-11-28T06:12:00Z",
+   "spMin30": 180,
+   "poaMin30": 631,
+   "spMinIda": 173,
+   "poaMinIda": 229
+  },
+  {
+   "t": "2026-11-28T07:27:46Z",
    "spMin30": 180,
    "poaMin30": 631,
    "spMinIda": 173,
